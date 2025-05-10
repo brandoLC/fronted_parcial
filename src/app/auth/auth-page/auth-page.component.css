@@ -1,0 +1,324 @@
+/* src/app/auth/auth-page/auth-page.component.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:host {
+  /* Paleta de Colores UTEC */
+  --utec-blue: #00ADEF;
+  --utec-blue-darker: #008CBF;
+  --utec-dark-gray: #2D2A2B;
+  --utec-light-gray: #F0F2F5;
+  --utec-text-secondary: #6c757d;
+  --white-color: #FFFFFF;
+  --danger-color: #E74C3C;
+
+  --border-radius-main: 18px;
+  --border-radius-button: 25px;
+  --border-radius-input: 8px;
+
+  --font-family-main: 'Poppins', sans-serif;
+
+  --transition-speed-fast: 150ms;
+  --transition-speed-medium: 0.5s;
+}
+
+/* Contenedor Principal del Formulario (Login/Registro) */
+.container {
+  background: var(--white-color); /* Fondo blanco sólido para máxima legibilidad */
+  border-radius: var(--border-radius-main);
+  /* Una sombra un poco más notoria para que destaque sobre la imagen de fondo nítida */
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+  width: 800px;
+  max-width: calc(100vw - 40px);
+  min-height: 560px;
+  font-family: var(--font-family-main), serif;
+}
+
+/* ... El resto de los estilos de auth-page.component.css
+   (form-container, form, input, button, overlay-container, etc.)
+   permanecen EXACTAMENTE IGUAL que en la última versión completa que te di.
+   Solo hemos modificado el :host y el .container levemente.
+*/
+
+/* Contenedores de Formularios (mitades izquierda/derecha) */
+.form-container {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transition: all var(--transition-speed-medium) ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  padding: 0 50px; /* Espacio interno para el contenido del formulario */
+  box-sizing: border-box;
+}
+
+.sign-in-container { left: 0; z-index: 2; }
+.sign-up-container { left: 0; opacity: 0; z-index: 1; }
+
+.container.right-panel-active .sign-in-container { transform: translateX(100%); opacity: 0; }
+.container.right-panel-active .sign-up-container { transform: translateX(100%); opacity: 1; z-index: 5; animation: show var(--transition-speed-medium); }
+
+@keyframes show {
+  0%, 49.99% { opacity: 0; z-index: 1; }
+  50%, 100% { opacity: 1; z-index: 5; }
+}
+
+/* Estilo de Formularios Internos */
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+}
+
+form h1 {
+  font-weight: 600;
+  font-size: 1.9em;
+  color: var(--utec-dark-gray);
+  margin-bottom: 25px;
+}
+
+/* Campos de Entrada y Select */
+input,
+select.role-select {
+  background: var(--utec-light-gray);
+  border: 1px solid #DDE2E8; /* Borde sutil fijo */
+  border-radius: var(--border-radius-input);
+  padding: 15px 20px;
+  margin: 10px 0;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: var(--font-family-main);
+  font-size: 0.9em;
+  color: var(--utec-dark-gray);
+  transition: border-color var(--transition-speed-fast), box-shadow var(--transition-speed-fast);
+}
+
+select.role-select {
+  cursor: pointer;
+  appearance: none; -webkit-appearance: none; -moz-appearance: none;
+  padding-right: 35px; /* Espacio para una posible flecha personalizada */
+}
+select.role-select option[value=""][disabled] {
+  color: var(--utec-text-secondary);
+}
+select.role-select:focus option[value=""][disabled] { display: none; }
+
+
+input::placeholder {
+  color: var(--utec-text-secondary);
+  font-weight: 400;
+}
+
+input:focus,
+select.role-select:focus {
+  outline: none;
+  border-color: var(--utec-blue);
+  box-shadow: 0 0 0 3px rgba(0, 173, 239, 0.25); /* Sombra UTEC Blue con opacidad */
+}
+
+/* Botones */
+button {
+  border-radius: var(--border-radius-button);
+  border: none;
+  background: var(--utec-blue);
+  color: var(--white-color);
+  font-size: 0.95em;
+  font-weight: 500;
+  padding: 14px 45px;
+  margin-top: 25px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color var(--transition-speed-fast), transform var(--transition-speed-fast), filter var(--transition-speed-fast);
+}
+button:hover {
+  background: var(--utec-blue-darker); /* Usar variable predefinida para el hover */
+  /* filter: brightness(0.9); */ /* Alternativa si no quieres definir --utec-blue-darker */
+  transform: translateY(-2px);
+}
+button:active {
+  transform: translateY(0px) scale(0.98);
+  filter: brightness(0.85);
+}
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 173, 239, 0.3);
+}
+
+button.ghost {
+  background-color: transparent;
+  border: 2px solid var(--white-color);
+  color: var(--white-color);
+  font-weight: 500;
+  min-width: 180px;
+  padding: 12px 30px;
+}
+button.ghost:hover {
+  background-color: var(--white-color);
+  color: var(--utec-blue);
+  transform: translateY(-2px);
+  filter: brightness(1); /* Resetear brillo si es necesario */
+}
+
+button[disabled] {
+  background-color: #BDBDBD;
+  color: #757575;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  filter: grayscale(50%);
+}
+button[disabled]:hover { background-color: #BDBDBD; transform: none; filter: grayscale(50%); }
+
+/* Contenedor y Paneles del Overlay */
+.overlay-container {
+  position: absolute; top: 0; left: 50%; width: 50%; height: 100%;
+  overflow: hidden;
+  transition: transform var(--transition-speed-medium) ease-in-out;
+  z-index: 100;
+  border-radius: 0 var(--border-radius-main) var(--border-radius-main) 0;
+}
+.container.right-panel-active .overlay-container {
+  transform: translateX(-100%);
+  border-radius: var(--border-radius-main) 0 0 var(--border-radius-main);
+}
+
+.overlay {
+  background: var(--utec-blue);
+  color: var(--white-color);
+  position: relative; left: -100%; height: 100%; width: 200%;
+  transform: translateX(0);
+  transition: transform var(--transition-speed-medium) ease-in-out;
+  display: flex;
+}
+.container.right-panel-active .overlay { transform: translateX(50%); }
+
+.overlay-panel {
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  padding: 0 50px;
+  box-sizing: border-box; text-align: center; position: absolute;
+  top: 0; height: 100%; width: 50%;
+  transform: translateX(0);
+  transition: transform var(--transition-speed-medium) ease-in-out;
+}
+.overlay-panel h1 {
+  font-weight: 700;
+  font-size: 2.1em;
+  color: var(--white-color);
+  margin: 0 0 20px 0;
+  line-height: 1.25;
+  word-wrap: break-word;
+}
+.overlay-panel p {
+  font-size: 1em;
+  font-weight: 300;
+  line-height: 1.7;
+  letter-spacing: 0.4px;
+  margin: 0 0 30px 0;
+  max-width: 100%;
+  word-wrap: break-word;
+}
+
+.overlay-left { transform: translateX(-20%); }
+.container.right-panel-active .overlay-left { transform: translateX(0); }
+.overlay-right { right: 0; transform: translateX(0); }
+.container.right-panel-active .overlay-right { transform: translateX(20%); }
+
+/* Enlace "¿Olvidaste tu contraseña?" */
+a {
+  color: var(--utec-text-secondary);
+  font-size: 0.85em;
+  text-decoration: none;
+  margin: 12px 0 18px 0;
+  font-weight: 500;
+}
+a:hover {
+  text-decoration: underline;
+  color: var(--utec-blue);
+}
+
+/* Para accesibilidad (ocultar labels visualmente) */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border-width: 0;
+}
+
+/* Mensajes de Error de Validación */
+.error-messages {
+  width: 100%;
+  text-align: left;
+  margin-top: -4px;
+  margin-bottom: 8px;
+}
+.error-messages small {
+  color: var(--danger-color);
+  font-size: 0.8em;
+  display: block;
+  font-weight: 500;
+  padding-left: 2px;
+}
+
+/* Mensaje de Error General del Formulario (de API) */
+.form-error-message {
+  color: var(--danger-color);
+  background-color: rgba(231, 76, 60, 0.1); /* Fondo rojo muy claro con opacidad */
+  border: 1px solid rgba(231, 76, 60, 0.25); /* Borde rojo muy claro con opacidad */
+  padding: 10px 15px;
+  border-radius: var(--border-radius-input);
+  margin-top: 15px;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 0.85em;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Estilos para el switch en Móvil */
+.mobile-switch {
+  display: none;
+  margin-top: 20px;
+  font-size: 0.9em;
+  color: var(--utec-text-secondary);
+}
+button.link-button {
+  background: none; border: none; color: var(--utec-blue); padding: 0;
+  text-decoration: underline; cursor: pointer; font-size: inherit;
+  text-transform: none; font-weight: 500; margin-left: 5px;
+}
+button.link-button:hover {
+  color: var(--utec-blue-darker);
+  transform: none; background-color: transparent;
+}
+
+/* Responsive */
+@media (max-width: 850px) {
+  /* :host {} No necesita ajustes aquí si el body lo maneja */
+  body::before { /* Si quieres diferente blur/overlay en móvil desde styles.css */
+    /* backdrop-filter: blur(2px); */
+    /* background-color: rgba(10, 25, 40, 0.75); */
+  }
+  .container {
+    width: 95%;
+    min-height: auto;
+    margin: 20px auto; /* El margin auto lo centrará si app-root es flex container */
+    box-shadow: 0 4px 15px rgba(0,0,0, 0.15);
+  }
+  .overlay-container { display: none; }
+  .form-container { width: 100%; position: static; opacity: 1 !important; transform: none !important; padding: 20px 30px; }
+  form { padding: 0; }
+  .container .sign-in-container { display: flex; }
+  .container .sign-up-container { display: none; }
+  .container.right-panel-active .sign-in-container { display: none; }
+  .container.right-panel-active .sign-up-container { display: flex; }
+  form h1 { font-size: 1.7em; margin-bottom: 20px; }
+  input, select.role-select { padding: 15px; font-size: 1em; margin: 8px 0; }
+  button { padding: 15px; font-size: 1em; margin-top: 20px; }
+  button.ghost { display: none; }
+  .mobile-switch { display: block; }
+  a { font-size: 0.9em; margin: 12px 0 18px 0; }
+  .error-messages small { font-size: 0.85em; }
+}

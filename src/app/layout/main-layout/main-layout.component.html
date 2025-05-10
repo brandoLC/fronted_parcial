@@ -1,0 +1,55 @@
+<div class="main-layout-container">
+  <nav class="main-navbar">
+    <div class="navbar-container">
+
+      <div class="navbar-section-start">
+        <a routerLink="/app/dashboard" class="navbar-brand">
+          <img
+            src="/assets/images/isologo-utec.webp"
+            alt="UTEC Logo"
+            class="navbar-logo"
+          />
+          <span>Plataforma Educativa</span>
+        </a>
+      </div>
+
+      <div class="navbar-section-center">
+        <a routerLink="/app/dashboard"
+           routerLinkActive="active-link"
+           [routerLinkActiveOptions]="{exact:true}">
+          Dashboard
+        </a>
+        <ng-container *ngIf="isStudent">
+          <a routerLink="/app/mis-cursos"     routerLinkActive="active-link">Mis Cursos</a>
+          <a routerLink="/app/inscribirme"    routerLinkActive="active-link">Inscribirme</a>
+          <a routerLink="/app/calificaciones" routerLinkActive="active-link">Calificaciones</a>
+        </ng-container>
+        <ng-container *ngIf="isProfessor">
+          <a routerLink="/app/gestion-cursos" routerLinkActive="active-link">Gestionar Cursos</a>
+        </ng-container>
+      </div>
+
+      <div class="navbar-section-end">
+        <div class="navbar-user-info" *ngIf="currentUser">
+          Bienvenido/a, {{ currentUser.nombre }} ({{ currentUser.rol }})
+        </div>
+        <button (click)="logout()" class="logout-button" title="Cerrar Sesión">
+          Cerrar Sesión
+        </button>
+      </div>
+
+    </div>
+  </nav>
+
+  <main class="page-content-wrapper">
+    <div class="content-area">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+
+  <footer class="main-footer">
+    <div class="footer-container">
+      <p>&copy; {{ currentYear }} Universidad de Ingeniería y Tecnología – UTEC. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+</div>

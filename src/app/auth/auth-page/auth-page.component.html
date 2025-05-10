@@ -1,0 +1,101 @@
+<div class="container" [class.right-panel-active]="isSignUpMode">
+  <div class="form-container sign-up-container">
+    <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+      <h1>Crea tu cuenta</h1>
+
+      <label for="registerNombre" class="sr-only">Nombre</label>
+      <input id="registerNombre" formControlName="nombre" type="text" placeholder="Nombre" />
+      <div *ngIf="registerNombre?.invalid && (registerNombre?.dirty || registerNombre?.touched)" class="error-messages">
+        <small *ngIf="registerNombre?.errors?.['required']">El nombre es requerido.</small>
+      </div>
+
+      <label for="registerApellido" class="sr-only">Apellido</label>
+      <input id="registerApellido" formControlName="apellido" type="text" placeholder="Apellido" />
+      <div *ngIf="registerApellido?.invalid && (registerApellido?.dirty || registerApellido?.touched)" class="error-messages">
+        <small *ngIf="registerApellido?.errors?.['required']">El apellido es requerido.</small>
+      </div>
+
+      <label for="registerEmail" class="sr-only">Email</label>
+      <input id="registerEmail" formControlName="email" type="email" placeholder="Email" />
+      <div *ngIf="registerEmail?.invalid && (registerEmail?.dirty || registerEmail?.touched)" class="error-messages">
+        <small *ngIf="registerEmail?.errors?.['required']">El email es requerido.</small>
+        <small *ngIf="registerEmail?.errors?.['email']">Por favor, introduce un email válido.</small>
+      </div>
+
+      <label for="registerPassword" class="sr-only">Contraseña</label>
+      <input id="registerPassword" formControlName="password" type="password" placeholder="Contraseña" />
+      <div *ngIf="registerPassword?.invalid && (registerPassword?.dirty || registerPassword?.touched)" class="error-messages">
+        <small *ngIf="registerPassword?.errors?.['required']">La contraseña es requerida.</small>
+        <small *ngIf="registerPassword?.errors?.['minlength']">La contraseña debe tener al menos 6 caracteres.</small>
+      </div>
+
+      <label for="registerRol" class="sr-only">Rol</label>
+      <select id="registerRol" formControlName="rol" class="role-select">
+        <option value="" disabled>Quiero registrarme como...</option>
+        <option value="student">Estudiante</option>
+        <option value="teacher">Profesor</option>
+      </select>
+      <div *ngIf="registerRol?.invalid && (registerRol?.dirty || registerRol?.touched)" class="error-messages">
+        <small *ngIf="registerRol?.errors?.['required']">Por favor, selecciona tu rol.</small>
+      </div>
+
+      <div *ngIf="registerError" class="form-error-message">
+        {{ registerError }}
+      </div>
+
+      <button type="submit" [disabled]="registerForm.invalid">Registrarse</button>
+
+      <p class="mobile-switch" *ngIf="isSignUpMode">
+        ¿Ya tienes una cuenta?
+        <button type="button" class="link-button" (click)="switchToLogin()">Inicia sesión</button>
+      </p>
+    </form>
+  </div>
+
+  <div class="form-container sign-in-container">
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <h1>Iniciar Sesión</h1>
+
+      <label for="loginEmail" class="sr-only">Email</label>
+      <input id="loginEmail" formControlName="email" type="email" placeholder="Email" />
+      <div *ngIf="loginEmail?.invalid && (loginEmail?.dirty || loginEmail?.touched)" class="error-messages">
+        <small *ngIf="loginEmail?.errors?.['required']">El email es requerido.</small>
+        <small *ngIf="loginEmail?.errors?.['email']">Por favor, introduce un email válido.</small>
+      </div>
+
+      <label for="loginPassword" class="sr-only">Contraseña</label>
+      <input id="loginPassword" formControlName="password" type="password" placeholder="Contraseña" />
+      <div *ngIf="loginPassword?.invalid && (loginPassword?.dirty || loginPassword?.touched)" class="error-messages">
+        <small *ngIf="loginPassword?.errors?.['required']">La contraseña es requerida.</small>
+      </div>
+
+      <a routerLink="#">¿Olvidaste tu contraseña?</a>
+
+      <div *ngIf="loginError" class="form-error-message">
+        {{ loginError }}
+      </div>
+
+      <button type="submit" [disabled]="loginForm.invalid">Entrar</button>
+
+      <p class="mobile-switch" *ngIf="!isSignUpMode">
+        ¿No tienes cuenta?
+        <button type="button" class="link-button" (click)="switchToRegister()">Regístrate aquí</button>
+      </p>
+    </form>
+  </div>
+
+  <div class="overlay-container">
+    <div class="overlay">
+      <div class="overlay-panel overlay-left">
+        <h1>¡Qué bueno verte de nuevo!</h1>
+        <p>Ingresa con tus datos para acceder a tus cursos, materiales y seguir progresando.</p>
+        <button class="ghost" (click)="switchToLogin()">Iniciar Sesión</button>
+      </div>
+      <div class="overlay-panel overlay-right">
+        <h1>¡Hola, futuro/a aprendiz!</h1>
+        <p>Crea tu cuenta y accede a un mundo de cursos, clases interactivas y conocimiento.</p>
+        <button class="ghost" (click)="switchToRegister()">Regístrate Ahora</button>
+      </div>
+    </div>
+  </div>
+</div>

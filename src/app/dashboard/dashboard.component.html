@@ -1,0 +1,44 @@
+<div class="page-container-panel">
+  <h2>Bienvenido al Dashboard</h2>
+  <p>Aquí podrás ver tus estadísticas generales.</p>
+
+  <!-- Métricas rápidas -->
+  <div class="metrics">
+    <div class="card">
+      <h3>Total de cursos</h3>
+      <p>{{ totalCursos }}</p>
+    </div>
+  </div>
+
+  <!-- Lista de cursos -->
+  <section class="mis-cursos">
+    <h3>Mis cursos</h3>
+    <ul>
+      <li *ngFor="let c of misCursos">
+        {{ c.nombre }} ({{ c.ciclo }})
+        <button (click)="verNotas(c)">Ver notas</button>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Tabla de notas del curso seleccionado -->
+  <section class="notas" *ngIf="cursoActivo">
+    <h3>Notas de {{ cursoActivo.nombre }}</h3>
+    <table>
+      <thead>
+      <tr>
+        <th>ID Nota</th>
+        <th>Valor</th>
+        <th>Fecha</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let n of notasSeleccionadas">
+        <td>{{ n.id_nota }}</td>
+        <td>{{ n.valor }}</td>
+        <td>{{ n.fecha | date:'short' }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+</div>

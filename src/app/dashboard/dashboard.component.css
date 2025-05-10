@@ -1,0 +1,32 @@
+/* src/app/user/pages/dashboard/dashboard.component.css */
+/* O donde estén tus variables globales si no las hereda de :host del layout */
+:host {
+  --white-color: #FFFFFF;
+  --utec-text-primary: #3A3F47;
+  --utec-text-secondary: #5F6773;
+  --border-color-light: #E0E6ED;
+  --border-radius-card: 10px; /* Un radio de borde agradable */
+  --shadow-subtle: 0 5px 15px rgba(0, 0, 0, 0.07); /* Sombra suave */
+}
+
+.page-container-panel {
+  background-color: var(--white-color);
+  padding: 25px 35px; /* Más padding interno */
+  border-radius: var(--border-radius-card);
+  box-shadow: var(--shadow-subtle);
+}
+
+.page-container-panel h2 { /* Estilo para el título principal de la página */
+  color: var(--utec-text-primary);
+  font-size: 1.7rem; /* Tamaño del título */
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--border-color-light); /* Línea divisoria sutil */
+}
+
+.page-container-panel p {
+  color: var(--utec-text-secondary);
+  line-height: 1.6;
+}
