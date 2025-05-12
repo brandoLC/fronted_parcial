@@ -1,1 +1,37 @@
-<p>my-courses works!</p>
+<div class="my-courses">
+  <h2>Mis Cursos</h2>
+  <div class="search-container">
+    <input type="text" placeholder="Buscar curso..." class="search-bar" (input)="buscarCurso($event)" />
+  </div>
+  <ul class="course-list">
+    <li *ngFor="let curso of misCursos" (click)="verNotas(curso)" [class.active]="cursoActivo === curso">
+      <div class="course-header">
+        <span class="course-name">{{ curso.nombre }}</span>
+      </div>
+      <div class="course-info">
+        <p>Ciclo: {{ curso.ciclo }}</p>
+        <p *ngIf="curso.profesor">Profesor: {{ curso.profesor }}</p>
+      </div>
+    </li>
+  </ul>
+
+  <div class="course-notes" *ngIf="cursoActivo">
+    <h3>Notas de {{ cursoActivo.nombre }}</h3>
+    <table class="notes-table">
+      <thead>
+        <tr>
+          <th>ID Nota</th>
+          <th>Valor</th>
+          <th>Fecha</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let nota of notasSeleccionadas">
+          <td>{{ nota.id_nota }}</td>
+          <td>{{ nota.valor }}</td>
+          <td>{{ nota.fecha | date:'dd/MM/yyyy' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+/* General container styling */
+.grades-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Course title styling */
+.grades-container h3 {
+  color: #333;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 5px;
+}
+
+/* Table styling */
+.grades-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.grades-container th, .grades-container td {
+  text-align: left;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.grades-container th {
+  background-color: #007bff;
+  color: white;
+}
+
+.grades-container tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.grades-container tr:hover {
+  background-color: #e9ecef;
+}

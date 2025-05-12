@@ -94,6 +94,7 @@ export class AuthPageComponent implements OnInit, OnDestroy {
         // Aquí estaba el problema si esperábamos LoginApiResponse:
         next: (user: Usuario) => { // <-- Estabas esperando Usuario, pero si auth.login devolvía LoginApiResponse, esto fallaba.
           console.log('Login exitoso', user); // user sería de tipo Usuario
+          console.log('Rol del usuario:', user.rol);
           this.router.navigate(['/app/dashboard']);
         },
         // ***** TERMINA LA CORRECCIÓN AQUÍ *****

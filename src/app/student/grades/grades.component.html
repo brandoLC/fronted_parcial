@@ -1,1 +1,24 @@
-<p>grades works!</p>
+<div class="grades-container">
+  <h2>Grades</h2>
+
+  <div *ngFor="let course of coursesWithGrades">
+    <h3>{{ course.courseName }}</h3>
+    <div *ngIf="course.grades.length === 0">
+      <p>No hay notas aún para este curso.</p>
+    </div>
+    <table *ngIf="course.grades.length > 0">
+      <thead>
+        <tr>
+          <th>Value</th>
+          <th>Exam Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let grade of course.grades">
+          <td>{{ grade.valor }}</td>
+          <td>{{ grade.fecha | date:'short' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

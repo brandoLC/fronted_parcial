@@ -8,8 +8,10 @@ import { GradesComponent }      from './student/grades/grades.component';
 import { ProfessorCoursesComponent } from './professor/professor-courses/professor-courses.component';
 import { StudentListComponent }      from './professor/student-list/student-list.component';
 import { GradeEntryComponent }       from './professor/grade-entry/grade-entry.component';
+import { ProfileComponent } from './student/profile/profile.component';
 import { authGuard } from './guards/auth.guard';
 import { roleGuard } from './guards/role.guard';
+import { DashboardProfesorComponent } from './professor/dashboard-profesor/dashboard-profesor.component';
 
 export const routes: Routes = [
   { path: 'auth', component: AuthPageComponent },
@@ -22,23 +24,30 @@ export const routes: Routes = [
       { path: 'mis-cursos',     component: MyCoursesComponent },
       { path: 'inscribirme',    component: EnrollmentComponent },
       { path: 'calificaciones', component: GradesComponent },
+      { path: 'perfil', component: ProfileComponent },
       {
         path: 'gestion-cursos',
         component: ProfessorCoursesComponent,
         canActivate: [roleGuard],
-        data: { role: 'profesor' }
+        data: { role: 'teacher' }
       },
       {
         path: 'gestion-cursos/:id/estudiantes',
         component: StudentListComponent,
         canActivate: [roleGuard],
-        data: { role: 'profesor' }
+        data: { role: 'teacher' }
       },
       {
         path: 'gestion-cursos/:id/notas',
         component: GradeEntryComponent,
         canActivate: [roleGuard],
-        data: { role: 'profesor' }
+        data: { role: 'teacher' }
+      },
+      {
+        path: 'professor/dashboard',
+        component: DashboardProfesorComponent,
+        canActivate: [roleGuard],
+        data: { role: 'teacher' }
       },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]

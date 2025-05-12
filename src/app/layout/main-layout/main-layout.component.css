@@ -23,8 +23,11 @@
   min-height: 100vh;
 }
 
+/* Ajuste para evitar solapamiento del contenido con el navbar */
 .page-content-wrapper {
   flex: 1;
+  margin-top: 4rem; /* Ajustar el margen superior para evitar solapamiento con el navbar */
+  overflow-y: auto; /* Permitir scroll si el contenido crece demasiado */
 }
 
 /* ==============================
@@ -34,9 +37,9 @@
   background-color: var(--utec-dark-gray);
   color: var(--white-color);
   box-shadow: var(--shadow-navbar);
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 1000;
+  z-index: 1000; /* Asegurar que esté por encima del contenido */
   width: 100%;
 }
 
@@ -128,6 +131,20 @@
   color: var(--white-color);
 }
 
+.navbar-section-end a {
+  display: inline-block;
+  padding: 10px 15px;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  transition: background-color 0.3s ease;
+}
+
+.navbar-section-end a:hover {
+  background-color: #0056b3;
+}
+
 /* ==============================
    CONTENIDO
    ============================== */
@@ -143,18 +160,27 @@
    FOOTER
    ============================== */
 .main-footer {
-  margin-top: auto;              /* empuja siempre hacia abajo */
-  background: #212529;
-  color: #90959b;
-  width: 100%;
-  padding: 1rem 0;
+  background-color: #3A3F47; /* Fondo sólido para visibilidad */
+  color: #FFFFFF; /* Texto blanco para contraste */
+  text-align: center;
+  padding: 20px; /* Espacio suficiente para el contenido */
+  font-size: 0.9rem; /* Tamaño de fuente ajustado */
+  border-top: 1px solid #E0E6ED; /* Línea superior para separación */
+  display: flex;
+  align-items: center; /* Centrar verticalmente */
+  justify-content: center; /* Centrar horizontalmente */
 }
+
 .footer-container {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 1rem;
   text-align: center;
   font-size: .8rem;
+}
+
+.footer-container p {
+  margin: 0; /* Eliminar márgenes para compactar */
 }
 
 /* ==============================
@@ -174,4 +200,18 @@
   .navbar-section-end {
     margin-top: 0.5rem;
   }
+}
+
+/* ==============================
+   PROFILE ICON
+   ============================== */
+.profile-icon img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.profile-icon img:hover {
+  transform: scale(1.1);
 }

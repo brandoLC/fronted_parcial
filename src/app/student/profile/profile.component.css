@@ -1,0 +1,64 @@
+.profile-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden; /* Evita que los elementos hijos se salgan del contenedor */
+}
+
+.profile-container h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.profile-container p {
+  font-size: 16px;
+  color: #555;
+  margin: 10px 0;
+}
+
+.profile-container label {
+  display: block;
+  margin: 10px 0;
+  font-weight: bold;
+  color: #333;
+}
+
+.profile-container input {
+  width: calc(100% - 20px); /* Ajusta el ancho para evitar que se salga */
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
+}
+
+.profile-container button {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 10px 5px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.profile-container button:hover {
+  background-color: #0056b3;
+}
+
+.profile-container button.cancel {
+  background-color: #dc3545;
+}
+
+.profile-container button.cancel:hover {
+  background-color: #a71d2a;
+}

@@ -6,6 +6,11 @@ export interface Curso {
   nombre: string;
   horario: string;
   ciclo: string;
+  profesor?: string; // Agregado para mostrar el profesor del curso
+  promedioNota?: number; // Promedio de notas del curso
+  created_at?: string; // Fecha de creación del curso
+  mensajeNotas?: string; // Mensaje para indicar que no hay notas disponibles
+  notas?: Nota[]; // Array to store notes for the course
 }
 
 export interface Nota {
@@ -15,8 +20,10 @@ export interface Nota {
 }
 
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { catchError } from 'rxjs/operators';
+import { of, throwError } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class OrchestratorService {
@@ -31,6 +38,14 @@ export class OrchestratorService {
   getNotas(estId: number, cursoCodigo: number) {
     return this.http.get<Nota[]>(
       `${this.base}/estudiante/${estId}/curso/${cursoCodigo}/notas`
+    ).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 404) {
+          console.warn('No se encontraron notas para este estudiante en el curso especificado.');
+          return of([]); // Retornar un array vacío si no hay notas
+        }
+        return throwError(() => error); // Propagar otros errores
+      })
     );
   }
 }

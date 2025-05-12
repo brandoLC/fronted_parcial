@@ -1,1 +1,24 @@
-<p>enrollment works!</p>
+<div class="enrollment-container">
+  <h2>Inscribirme en Cursos</h2>
+
+  <section class="cursos-disponibles">
+    <h3>Cursos Disponibles</h3>
+    <ul>
+      <li *ngFor="let curso of cursosDisponibles">
+        {{ curso.nombre }} ({{ curso.ciclo }})
+        <span *ngIf="estaInscrito(curso.codigo)">Ya inscrito</span>
+        <button *ngIf="!estaInscrito(curso.codigo)" (click)="inscribirEstudiante(curso.codigo)">Inscribirme</button>
+      </li>
+    </ul>
+  </section>
+
+  <section class="cursos-inscritos">
+    <h3>Mis Cursos Inscritos</h3>
+    <ul>
+      <li *ngFor="let curso of cursosInscritos">
+        {{ curso.nombre }} ({{ curso.ciclo }})
+        <button (click)="eliminarInscripcion(curso.codigo)">Cancelar Inscripción</button>
+      </li>
+    </ul>
+  </section>
+</div>

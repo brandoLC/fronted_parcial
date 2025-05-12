@@ -1,1 +1,25 @@
-<p>professor-courses works!</p>
+<div class="container">
+  <h2>Gestionar Cursos</h2>
+
+  <button (click)="toggleAvailableCourses()" class="btn btn-primary" *ngIf="!showAvailableCourses">
+    Mostrar Cursos Disponibles
+  </button>
+
+  <div *ngIf="showAvailableCourses" class="available-courses">
+    <h3>Cursos Disponibles</h3>
+    <ul>
+      <li *ngFor="let course of availableCourses">
+        <span>{{ course.nombre }} ({{ course.ciclo }})</span>
+        <button (click)="joinCourse(course.id)" class="btn btn-success">Unirse</button>
+      </li>
+    </ul>
+
+    <button (click)="toggleAvailableCourses()" class="btn btn-secondary">
+      Ocultar Cursos Disponibles
+    </button>
+  </div>
+
+  <div *ngIf="showAvailableCourses && availableCourses.length === 0">
+    <p>No hay cursos disponibles en este momento.</p>
+  </div>
+</div>

@@ -25,11 +25,16 @@
           <a routerLink="/app/calificaciones" routerLinkActive="active-link">Calificaciones</a>
         </ng-container>
         <ng-container *ngIf="isProfessor">
-          <a routerLink="/app/gestion-cursos" routerLinkActive="active-link">Gestionar Cursos</a>
+          <a routerLink="/app/gestion-cursos" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">Gestionar Cursos</a>
+          <a routerLink="/app/gestion-cursos/:id/estudiantes" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">Estudiantes</a>
+          <a routerLink="/app/gestion-cursos/:id/notas" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">Calificaciones</a>
         </ng-container>
       </div>
 
       <div class="navbar-section-end">
+        <a routerLink="/app/perfil" routerLinkActive="active-link" class="profile-icon">
+          <fa-icon [icon]="'user-circle'"></fa-icon>
+        </a>
         <div class="navbar-user-info" *ngIf="currentUser">
           Bienvenido/a, {{ currentUser.nombre }} ({{ currentUser.rol }})
         </div>

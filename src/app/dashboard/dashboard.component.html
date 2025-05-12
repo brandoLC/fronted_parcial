@@ -1,30 +1,48 @@
 <div class="page-container-panel">
-  <h2>Bienvenido al Dashboard</h2>
-  <p>Aquí podrás ver tus estadísticas generales.</p>
+  <div *ngIf="currentUser?.rol === 'student'">
+    <h2>Bienvenido Estudiante</h2>
+    <p>Aquí podrás ver tus estadísticas generales.</p>
 
-  <!-- Métricas rápidas -->
-  <div class="metrics">
-    <div class="card">
-      <h3>Total de cursos</h3>
-      <p>{{ totalCursos }}</p>
+    <!-- Métricas rápidas -->
+    <div class="metrics">
+      <div class="card">
+        <h3>Total de cursos</h3>
+        <p>{{ totalCursos }}</p>
+      </div>
+      <div class="card">
+        <h3>Promedio de notas</h3>
+        <p>{{ promedioNotas }}</p>
+      </div>
     </div>
+
+    <!-- Lista de cursos -->
+    <section class="mis-cursos">
+      <h3>Mis cursos</h3>
+      <ul>
+        <li *ngFor="let c of misCursos">
+          {{ c.nombre }} ({{ c.ciclo }})
+          <button class="btn-ver-notas" (click)="verNotas(c)">Ver notas <i class="icon-eye"></i></button>
+        </li>
+      </ul>
+    </section>
   </div>
 
-  <!-- Lista de cursos -->
-  <section class="mis-cursos">
-    <h3>Mis cursos</h3>
+  <div *ngIf="currentUser?.rol === 'teacher'">
+    <h2>Bienvenido Profesor</h2>
+    <p>Aquí están los cursos que gestionas:</p>
     <ul>
-      <li *ngFor="let c of misCursos">
-        {{ c.nombre }} ({{ c.ciclo }})
-        <button (click)="verNotas(c)">Ver notas</button>
+      <li *ngFor="let course of professorCourses">
+        <h3>{{ course.nombre }} ({{ course.ciclo }})</h3>
+        <p>Horario: {{ course.horario }}</p>
+        <p>Estudiantes inscritos: {{ course.totalEstudiantes }}</p>
       </li>
     </ul>
-  </section>
+  </div>
 
   <!-- Tabla de notas del curso seleccionado -->
   <section class="notas" *ngIf="cursoActivo">
     <h3>Notas de {{ cursoActivo.nombre }}</h3>
-    <table>
+    <table class="styled-table">
       <thead>
       <tr>
         <th>ID Nota</th>
@@ -33,12 +51,25 @@
       </tr>
       </thead>
       <tbody>
+      <tr *ngIf="notasSeleccionadas.length === 0">
+        <td colspan="3">No hay notas disponibles para este curso.</td>
+      </tr>
       <tr *ngFor="let n of notasSeleccionadas">
         <td>{{ n.id_nota }}</td>
         <td>{{ n.valor }}</td>
-        <td>{{ n.fecha | date:'short' }}</td>
+        <td>{{ n.fecha | date:'dd MMMM yyyy, h:mm a' }}</td>
       </tr>
       </tbody>
     </table>
+  </section>
+
+  <!-- Ajuste de estilo: Eliminado el cuadro que encierra toda la sección de notificaciones -->
+  <section class="notificaciones" style="margin-top: 20px;">
+    <h3 style="color: #333; font-weight: bold;">Notificaciones</h3>
+    <ul style="list-style-type: none; padding: 0;">
+      <li *ngFor="let notificacion of notificaciones" style="margin-bottom: 10px; padding: 10px; border-bottom: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9;">
+        <i class="icon-bell" style="color: #007bff; margin-right: 8px;"></i>{{ notificacion }}
+      </li>
+    </ul>
   </section>
 </div>

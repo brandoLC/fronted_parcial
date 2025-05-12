@@ -1,0 +1,27 @@
+<div class="profile-container">
+  <h1>Perfil del Usuario</h1>
+
+  <div *ngIf="!isEditing">
+    <p><strong>Nombre:</strong> {{ user.nombre }}</p>
+    <p><strong>Apellido:</strong> {{ user.apellido }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <button (click)="toggleEdit()">Editar Perfil</button>
+  </div>
+
+  <div *ngIf="isEditing">
+    <label>
+      Nombre:
+      <input [(ngModel)]="user.nombre" />
+    </label>
+    <label>
+      Apellido:
+      <input [(ngModel)]="user.apellido" />
+    </label>
+    <label>
+      Email:
+      <input [(ngModel)]="user.email" />
+    </label>
+    <button (click)="saveProfile()">Guardar</button>
+    <button (click)="toggleEdit()">Cancelar</button>
+  </div>
+</div>

@@ -54,8 +54,8 @@ export class AuthService {
           localStorage.setItem(this.storageUserKey, JSON.stringify(loggedInUser));
           // Notificar a los suscriptores que el usuario ha cambiado
           this.currentUserSubject.next(loggedInUser);
-          // Redirigir al dashboard principal de la aplicación
-          this.router.navigate(['/mis-cursos']); // O la ruta principal protegida
+          // Eliminar la redirección automática
+          // this.router.navigate(['/mis-cursos']);
         })
       );
   }

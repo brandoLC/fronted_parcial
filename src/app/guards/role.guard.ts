@@ -18,11 +18,14 @@ export const roleGuard: CanActivateFn = (
 
   const expectedRole = route.data['role'] as string;
   const actualUserRole = authService.userRole; // <--- CORRECCIÓN: Usa el getter userRole
+  const normalizedRole = actualUserRole;
+
+  console.log('Guard evaluando acceso:', { expectedRole, actualUserRole });
 
   // O podrías usar el método hasRole que ya tenías:
   // if (authService.hasRole(expectedRole)) {
 
-  if (actualUserRole && actualUserRole === expectedRole) {
+  if (normalizedRole && normalizedRole === expectedRole) {
     return true;
   }
 
